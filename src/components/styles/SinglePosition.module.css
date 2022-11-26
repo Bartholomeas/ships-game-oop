@@ -1,0 +1,10 @@
+.wrapper {
+  background-color: white;
+  aspect-ratio: 1 / 1;
+  padding: 20px;
+  transition: background-colors 0.2s ease;
+}
+
+.wrapper:hover {
+  background-color: #f3f3f3;
+}

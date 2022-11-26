@@ -1,0 +1,8 @@
+.board__wrapper {
+  background-color: #f3f3f3;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  /* max-width: 600px;
+  max-height: 600px; */
+}
