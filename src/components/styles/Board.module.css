@@ -1,8 +1,22 @@
-.board__wrapper {
-  background-color: #f3f3f3;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.wrapper p {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.position__wrapper {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(10, 1fr);
-  /* max-width: 600px;
-  max-height: 600px; */
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 2px;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(9, 1fr);
+  border-radius: 8px;
+  background-color: #f3f3f3;
 }

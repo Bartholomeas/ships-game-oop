@@ -4,42 +4,37 @@ import * as style from "./styles/Board.module.css";
 
 interface Props {
   props: any;
+  // playerId: number;
 }
 
-export default class Board
-  extends Component<{}, { tekst: string; x: number[]; y: string[] }>
-  implements Props
-{
+export default class Board extends Component<{}, { x: number[]; y: string[] }> implements Props {
+  // static contextType = AppContext;
+
   constructor(props: any) {
     super(props);
     this.state = {
-      tekst: "ebebeb",
-      x: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-      y: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"],
+      x: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      y: ["a", "b", "c", "d", "e", "f", "g", "h", "i"],
     };
   }
 
-  newState() {
-    console.log(this.props);
-    // this.setState((state, props) => {
-    //   tekst: "new state";
-    // });
+  userOneHandler = () => {
+    console.log("test");
+  };
+
+  componentDidMount() {
+    this.userOneHandler();
   }
-
-  // componentDidMount() {
-  //   console.log("dupa pawiana");
-  // }
-
-  // componentWillUnmount() {
-  //   console.log("unmount");
-  // }
 
   render() {
     return (
-      <div className={style.board__wrapper}>
-        {this.state.x.map(item =>
-          this.state.y.map(el => <SinglePosition>{item + el}</SinglePosition>)
-        )}
+      <div className={style.wrapper}>
+        {/* <p>Pole gracza {this.props.playerId}</p> */}
+        <div className={style.position__wrapper}>
+          {this.state.y.map(item =>
+            this.state.x.map(el => <SinglePosition key={item + el}>{item + el}</SinglePosition>)
+          )}
+        </div>
       </div>
     );
   }
