@@ -4,22 +4,25 @@ import Player from "./components/Player";
 import * as style from "./App.module.css";
 
 class App extends Component {
-  PlayerOne: any;
-  PlayerTwo: any;
-
-  componentDidMount() {
+  constructor(private PlayerOne: any, private PlayerTwo: any, props: any) {
+    super(props);
     this.PlayerOne = new Player(1, 4, true);
     this.PlayerTwo = new Player(2, 5, false);
-    // console.log(this.PlayerOne, this.PlayerTwo);
   }
 
+  componentDidMount() {
+    // console.log(this.PlayerOne.id);
+  }
+  // console.log(this.PlayerOne)
+
+  // playerId={this.PlayerOne.id}
   render() {
     return (
       <div>
         <p>Gra w statki</p>
         <div className={style.wrapper}>
-          <Board clickHandler={() => this.PlayerOne.clickHandler()} />
-          <Board clickHandler={() => this.PlayerTwo.clickHandler()} />
+          <Board playerId={this.PlayerOne.id} clickHandler={() => this.PlayerOne.clickHandler()} />
+          <Board playerId={this.PlayerTwo.id} clickHandler={() => this.PlayerTwo.clickHandler()} />
         </div>
       </div>
     );

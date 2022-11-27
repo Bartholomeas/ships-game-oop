@@ -16,10 +16,14 @@ export default class Board extends Component<any, { x: number[]; y: string[] }> 
     };
   }
 
+  componentDidMount() {
+    console.log(this.props);
+  }
+
   render() {
     return (
       <div className={style.wrapper}>
-        <p>Pole gracza {this.props.playerId}</p>
+        {/* <p>Pole gracza {this.props.playerId}</p> */}
         <div className={style.position__wrapper}>
           {this.state.y.map(item =>
             this.state.x.map(el => (
