@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 
-interface Props {
-  direction: "x" | "y";
-}
-
 export default class Ship extends Component {
-  constructor(public width: number, public direction: Props, props: any) {
+  constructor(public width: number, public direction: "x" | "y", props?: any) {
     super(props);
   }
 }

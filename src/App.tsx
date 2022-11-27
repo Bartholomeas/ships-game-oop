@@ -10,7 +10,7 @@ class App extends Component {
   componentDidMount() {
     this.PlayerOne = new Player(1, 4, true);
     this.PlayerTwo = new Player(2, 5, false);
-    console.log(this.PlayerOne, this.PlayerTwo);
+    // console.log(this.PlayerOne, this.PlayerTwo);
   }
 
   render() {
@@ -18,8 +18,8 @@ class App extends Component {
       <div>
         <p>Gra w statki</p>
         <div className={style.wrapper}>
-          <Board />
-          <Board />
+          <Board clickHandler={() => this.PlayerOne.clickHandler()} />
+          <Board clickHandler={() => this.PlayerTwo.clickHandler()} />
         </div>
       </div>
     );

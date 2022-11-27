@@ -2,6 +2,7 @@ import { Component } from "react";
 import * as style from "./styles/SinglePosition.module.css";
 
 interface Props {
+  [key: string]: any;
   children: string;
 }
 interface State {}
@@ -10,13 +11,13 @@ export default class SinglePosition extends Component<Props, State> {
     super(props);
   }
 
-  // componentDidMount(): void {
-  //   console.log(this.props);
+  // componentDidMount() {
+  // console.log(this.props);
   // }
 
   render() {
     return (
-      <button onClick={() => console.log(this.props.children)} className={style.wrapper}>
+      <button onClick={this.props.clickFn} className={style.wrapper}>
         {this.props.children}
       </button>
     );

@@ -9,4 +9,8 @@ export default class Player extends Component {
   componentDidMount() {
     console.log(this.props);
   }
+
+  clickHandler() {
+    console.log("Player:" + this.id);
+  }
 }

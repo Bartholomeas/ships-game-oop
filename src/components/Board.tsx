@@ -4,10 +4,8 @@ import * as style from "./styles/Board.module.css";
 
 interface Props {
   props: any;
-  // playerId: number;
 }
-
-export default class Board extends Component<{}, { x: number[]; y: string[] }> implements Props {
+export default class Board extends Component<any, { x: number[]; y: string[] }> implements Props {
   // static contextType = AppContext;
 
   constructor(props: any) {
@@ -18,21 +16,17 @@ export default class Board extends Component<{}, { x: number[]; y: string[] }> i
     };
   }
 
-  userOneHandler = () => {
-    console.log("test");
-  };
-
-  componentDidMount() {
-    this.userOneHandler();
-  }
-
   render() {
     return (
       <div className={style.wrapper}>
-        {/* <p>Pole gracza {this.props.playerId}</p> */}
+        <p>Pole gracza {this.props.playerId}</p>
         <div className={style.position__wrapper}>
           {this.state.y.map(item =>
-            this.state.x.map(el => <SinglePosition key={item + el}>{item + el}</SinglePosition>)
+            this.state.x.map(el => (
+              <SinglePosition clickFn={this.props.clickHandler} key={item + el}>
+                {item + el}
+              </SinglePosition>
+            ))
           )}
         </div>
       </div>
