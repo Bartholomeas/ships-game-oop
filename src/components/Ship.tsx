@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 export default class Ship extends Component {
-  constructor(public width: number, public direction: "x" | "y", props?: any) {
+  constructor(public size: number, public direction: "x" | "y", props?: any) {
     super(props);
   }
 }
