@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import Board from "./components/Board";
-import Player from "./components/Player";
-import * as style from "./App.module.css";
+import React, { Component } from 'react';
+import Board from './components/Board';
+import Player from './components/Player';
+import * as style from './App.module.css';
+import Ship from './components/Ship';
 
 interface StateInterface {
   [key: string]: string[] | number[] | string | number;
@@ -20,13 +21,30 @@ class App extends Component<any, StateInterface> {
   }
 
   startQueue() {
-    console.log(`Turn of player ${this.state.playerTurn}`);
-    console.log(this.PlayerOne);
+    // console.log(`Turn of player ${this.state.playerTurn}`);
+    // console.log(this.PlayerOne);
+    const game = new Board([
+      new Ship(1, [[0, 0]]),
+      new Ship(1, [[0, 4]]),
+      new Ship(1, [[3, 2]]),
+      new Ship(1, [[4, 6]]),
+      new Ship(2, [
+        [9, 5],
+        [9, 6],
+      ]),
+      new Ship(2, [
+        [5, 5],
+        [5, 6],
+      ]),
+    ]);
+
+    console.log(game);
   }
 
   componentDidMount() {
     this.startQueue();
   }
+  // 4jednoamsztowce 3dwumasztowce 2trzymasztowce 1czteromasztowiec
 
   render() {
     return (

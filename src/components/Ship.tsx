@@ -1,9 +1,22 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 export default class Ship extends Component {
-  constructor(public size: number, public direction: "x" | "y", props?: any) {
+  private readonly size;
+  private health;
+  private readonly positions;
+
+  constructor(size: number, positions: Array<[number, number]>, props?: any) {
     super(props);
+    this.size = size;
+    this.health = size;
+    this.positions = positions;
+  }
+
+  public hit(): void {
+    this.health--;
+  }
+
+  public isSunk(): boolean {
+    return this.health === 0;
   }
 }
-
-// 4jednoamsztowce 3dwumasztowce 2trzymasztowce 1czteromasztowiec
