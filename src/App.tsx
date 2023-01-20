@@ -24,27 +24,42 @@ class App extends Component<any, StateInterface> {
     // console.log(`Turn of player ${this.state.playerTurn}`);
     // console.log(this.PlayerOne);
     const game = new Board([
-      new Ship(1, [[0, 0]]),
-      new Ship(1, [[0, 4]]),
-      new Ship(1, [[3, 2]]),
-      new Ship(1, [[4, 6]]),
-      new Ship(2, [
-        [9, 5],
-        [9, 6],
+      new Ship(5, [
+        [0, 0],
+        [0, 1],
+        [0, 2],
+        [0, 3],
+        [0, 4],
+      ]),
+      new Ship(4, [
+        [1, 0],
+        [1, 1],
+        [1, 2],
+        [1, 3],
+      ]),
+      new Ship(3, [
+        [2, 0],
+        [2, 1],
+        [2, 2],
+      ]),
+      new Ship(3, [
+        [3, 0],
+        [3, 1],
+        [3, 2],
       ]),
       new Ship(2, [
-        [5, 5],
-        [5, 6],
+        [4, 0],
+        [4, 1],
       ]),
     ]);
 
-    console.log(game);
+    const board = game.render();
+    // console.log(game);
   }
 
   componentDidMount() {
     this.startQueue();
   }
-  // 4jednoamsztowce 3dwumasztowce 2trzymasztowce 1czteromasztowiec
 
   render() {
     return (
@@ -52,8 +67,38 @@ class App extends Component<any, StateInterface> {
         <p>Gra w statki</p>
         <p>Kolej gracza:</p>
         <div className={style.wrapper}>
-          <Board playerId={this.PlayerOne.id} clickHandler={() => this.PlayerOne.clickHandler()} />
-          <Board playerId={this.PlayerTwo.id} clickHandler={() => this.PlayerTwo.clickHandler()} />
+          {this.board}
+          <Board
+            ships={[
+              new Ship(5, [
+                [0, 0],
+                [0, 1],
+                [0, 2],
+                [0, 3],
+                [0, 4],
+              ]),
+              new Ship(4, [
+                [1, 0],
+                [1, 1],
+                [1, 2],
+                [1, 3],
+              ]),
+              new Ship(3, [
+                [2, 0],
+                [2, 1],
+                [2, 2],
+              ]),
+              new Ship(3, [
+                [3, 0],
+                [3, 1],
+                [3, 2],
+              ]),
+              new Ship(2, [
+                [4, 0],
+                [4, 1],
+              ]),
+            ]}
+          />
         </div>
       </div>
     );
@@ -61,3 +106,11 @@ class App extends Component<any, StateInterface> {
 }
 
 export default App;
+// <div>
+//   <p>Gra w statki</p>
+//   <p>Kolej gracza:</p>
+//   <div className={style.wrapper}>
+//     <Board playerId={this.PlayerOne.id} clickHandler={() => this.PlayerOne.clickHandler()} />
+//     <Board playerId={this.PlayerTwo.id} clickHandler={() => this.PlayerTwo.clickHandler()} />
+//   </div>
+// </div>

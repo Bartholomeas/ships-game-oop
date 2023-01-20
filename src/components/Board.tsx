@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import Ship from './Ship';
-import SinglePosition from './SinglePosition';
 import * as style from './styles/Board.module.css';
 
 interface Props {
@@ -9,41 +8,46 @@ interface Props {
 export default class Board extends Component<any, { x: number[]; y: string[] }> implements Props {
   private readonly ships;
   private readonly grid;
-
-  constructor(ships: Ship[], props?: any) {
-    super(props);
+  public readonly size = 9;
+  constructor(ships: Ship[]) {
+    super(ships);
     this.ships = ships;
-    this.grid = Array(9)
+    this.grid = Array(this.size)
       .fill(null)
-      .map(() => Array(9).fill(null));
-
-    this.state = {
-      x: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-      y: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'],
-    };
+      .map(() => Array(this.size).fill(null));
   }
 
   private placeShips() {
-    console.log('test');
+    // console.log(this.ships[0]);
+    const { ships } = this.ships;
+    // console.log(ships);
+    for (const { context: ship } of ships) {
+      console.log(ship);
+    }
   }
 
   componentDidMount() {
-    console.log(this.grid);
+    this.placeShips();
   }
 
-  render() {
+  public render() {
+    const cells = [];
+    for (let x = 0; x < this.size; x++) {
+      for (let y = 0; y < this.size; y++) {
+        cells.push(
+          <button
+            onClick={() => console.log(y, x)}
+            className={`${style.ship} ${this.grid[x][y] ? style['ship--active'] : ''}`}
+            key={`${x}-${y}`}>
+            {this.grid[x][y] ? 'S' : '-'}
+          </button>
+        );
+      }
+    }
+
     return (
       <div className={style.wrapper}>
-        <p>Pole gracza {this.props.playerId}</p>
-        <div className={style.position__wrapper}>
-          {this.state.y.map(item =>
-            this.state.x.map(el => (
-              <SinglePosition clickFn={this.props.clickHandler} key={item + el}>
-                {item + el}
-              </SinglePosition>
-            ))
-          )}
-        </div>
+        <div className={style.position__wrapper}>{cells}</div>
       </div>
     );
   }
