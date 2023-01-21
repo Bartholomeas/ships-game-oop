@@ -67,7 +67,7 @@ class App extends Component<any, StateInterface> {
         <p>Gra w statki</p>
         <p>Kolej gracza:</p>
         <div className={style.wrapper}>
-          {this.board}
+          {/* {this.board} */}
           <Board
             ships={[
               new Ship(5, [
