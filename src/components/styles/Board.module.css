@@ -39,3 +39,7 @@
 .ship__active {
   background-color: #e8b83f;
 }
+
+.ship__sunk {
+  background-color: rgb(229, 109, 109);
+}

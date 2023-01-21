@@ -11,13 +11,6 @@ interface StateInterface {
 class App extends Component<any, StateInterface> {
   constructor(private PlayerOne: any, private PlayerTwo: any, props: any) {
     super(props);
-    this.PlayerOne = new Player(1, 4, true);
-    this.PlayerTwo = new Player(2, 5, false);
-
-    this.state = {
-      shipSm: [],
-      playerTurn: 1,
-    };
   }
 
   startQueue() {
@@ -43,9 +36,9 @@ class App extends Component<any, StateInterface> {
         [2, 2],
       ]),
       new Ship(3, [
-        [3, 0],
-        [3, 1],
-        [3, 2],
+        [6, 0],
+        [6, 1],
+        [6, 2],
       ]),
       new Ship(2, [
         [4, 0],
@@ -89,9 +82,9 @@ class App extends Component<any, StateInterface> {
                 [2, 2],
               ]),
               new Ship(3, [
-                [3, 0],
-                [3, 1],
-                [3, 2],
+                [6, 5],
+                [6, 6],
+                [6, 7],
               ]),
               new Ship(2, [
                 [4, 0],
