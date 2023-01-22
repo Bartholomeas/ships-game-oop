@@ -26,6 +26,7 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
 
   private placeShips() {
     const { ships }: any = this.ships;
+    console.log(ships);
     for (const ship of ships) {
       for (const [x, y] of ship.positions) {
         this.grid[x][y] = ship;
