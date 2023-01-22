@@ -7,13 +7,14 @@ interface Props {
 }
 
 export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }> implements Props {
-  private ships;
+  public ships: Ship[];
   public grid;
   public readonly size = 9;
 
   constructor(ships: Ship[]) {
     super(ships as any);
     this.ships = ships;
+    this.size = 9;
     this.grid = Array(this.size)
       .fill(null)
       .map(() => Array(this.size).fill(null));
@@ -21,24 +22,33 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
     this.state = {
       cells: [],
     };
-    this.placeShips();
+
+    // this.placeShips = this.placeShips.bind(this);
+    // this.attackShip = this.attackShip.bind(this);
+    // this.checkWin = this.checkWin.bind(this);
+    // this.render = this.render.bind(this);
   }
 
   private placeShips() {
-    const { ships }: any = this.ships;
-    console.log(ships);
-    for (const ship of ships) {
+    // const { ships }: any = this.ships;
+    if (!this.ships) return;
+    for (const ship of this.ships) {
       for (const [x, y] of ship.positions) {
         this.grid[x][y] = ship;
       }
     }
   }
 
+  public checkSmth() {
+    // console.log(this.size);
+    console.log(this.state.cells);
+    return this.ships;
+  }
+
   public placeSingleShip(ship: Ship) {
     const { ships }: any = this.ships;
     for (const [x, y] of ships) {
       // this.grid[x][y] = ship;
-      console.log(x, y);
     }
   }
 
@@ -85,6 +95,7 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
           return { cells: newCells };
         });
         this.grid[x][y] = -1;
+        return true;
       }
 
       return true;
@@ -125,11 +136,28 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
+    console.log('to jest to');
+    this.placeShips();
     this.renderCells();
+    console.log(this.state.cells);
+  }
+
+  componentDidlUpdate() {
+    console.log('update to jest');
+  }
+
+  public generateBoard() {
+    this.placeShips();
+    this.renderCells();
+    this.render();
+    console.log('generuje');
   }
 
   public render() {
+    // this.renderCells();
+
+    // console.log(this.state.cells);
     return (
       <div className={style.wrapper}>
         <div className={style.position__wrapper}>{this.state.cells}</div>
