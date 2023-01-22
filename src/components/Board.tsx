@@ -41,11 +41,13 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
       this.grid[x][y].hit();
 
       if (this.grid[x][y].isSunk()) {
+        this.grid[x][y].returnPositions();
         this.grid[x][y] = -1;
         this.setState(prevState => {
           const newCells = [...prevState.cells];
+          console.log(newCells[x * this.size + y]);
           newCells[x * this.size + y] = (
-            <button className={`${style.ship} ${style.ship__sunk}`} key={`${x}-${y}`}>
+            <button className={`${style.ship} ${style.ship__sunk}`} key={x * this.size + y}>
               X
             </button>
           );

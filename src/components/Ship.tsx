@@ -22,8 +22,15 @@ export default class Ship extends Component {
       return;
     }
   }
+  public returnPositions() {
+    console.log(this.positions);
+    if (this.isSunk()) {
+      return this.positions;
+    }
+  }
 
   public isSunk(): boolean {
+    // console.log(this.positions);
     if (this.health === 0) console.log('zatopiony');
     return this.health === 0;
   }
