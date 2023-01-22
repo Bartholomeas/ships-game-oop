@@ -12,11 +12,22 @@ export default class Player extends Component<any, any> {
     this.board = board;
   }
 
-  componentDidMount() {
-    console.log(this.props);
-  }
+  public placeShip(size: number, x: number, y: number) {
+    if (this.board.isOccupied(x, y)) {
+      return false;
+    }
+    const positions: [number, number][] = [[x, y]];
+    for (let i = 1; i < size; i++) {
+      const newX = x + i;
 
-  clickHandler() {
-    console.log('Player:');
+      if (newX >= this.board.size || this.board.isOccupied(newX, y)) {
+        return false;
+      }
+      positions.push([newX, y]);
+    }
+    const ship = new Ship(size, positions);
+    this.ships.push(ship);
+    this.board.placeSingleShip(ship);
+    return true;
   }
 }

@@ -5,7 +5,7 @@
 }
 
 .wrapper p {
-  font-size: 24px;
+  font-size: 16px;
   font-weight: 600;
 }
 
@@ -16,19 +16,20 @@
   width: 100%;
   padding: 2px;
   grid-template-columns: repeat(9, 1fr);
-  grid-template-rows: repeat(9, 1fr);
   border-radius: 8px;
   background-color: #f3f3f3;
 }
 
 .ship {
   background-color: white;
+  color: rgb(148, 148, 148);
   aspect-ratio: 1 / 1;
-  padding: 20px;
+  padding: 15px;
+  margin: 2px;
   transition: background-colors 0.2s ease;
   border: none;
   border-radius: 8px;
-  margin: 2px;
+  font-size: 12px;
   cursor: pointer;
 }
 
@@ -40,6 +41,11 @@
   background-color: #e8b83f;
 }
 
+.ship__hurt {
+  background-color: rgb(219, 147, 53);
+  color: white;
+}
 .ship__sunk {
   background-color: rgb(229, 109, 109);
+  color: white;
 }

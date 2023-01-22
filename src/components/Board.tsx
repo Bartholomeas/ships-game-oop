@@ -21,6 +21,7 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
     this.state = {
       cells: [],
     };
+    this.placeShips();
   }
 
   private placeShips() {
@@ -30,6 +31,19 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
         this.grid[x][y] = ship;
       }
     }
+  }
+
+  public placeSingleShip(ship: Ship) {
+    const { ships }: any = this.ships;
+    for (const [x, y] of ships) {
+      // this.grid[x][y] = ship;
+      console.log(x, y);
+    }
+  }
+
+  public isOccupied(x: number, y: number) {
+    console.log('isOccupied function');
+    return this.grid[x][y] !== null;
   }
 
   public attackShip(x: number, y: number): boolean {
@@ -47,7 +61,7 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
             const newCells = [...prevState.cells];
             newCells[i * this.size + j] = (
               <button
-                onClick={() => console.log('zatopiony')}
+                onClick={() => console.log(this)}
                 className={`${style.ship} ${style.ship__sunk}`}
                 key={i * this.size + j}>
                 X
@@ -56,7 +70,22 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
             return { cells: newCells };
           });
         }
+      } else {
+        this.setState(prevState => {
+          const newCells = [...prevState.cells];
+          newCells[x * this.size + y] = (
+            <button
+              onClick={() => console.log(this)}
+              className={`${style.ship} ${style.ship__hurt}`}
+              key={x * this.size + y}>
+              X
+            </button>
+          );
+          return { cells: newCells };
+        });
+        this.grid[x][y] = -1;
       }
+
       return true;
     }
     return false;
@@ -81,9 +110,13 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
               onClick={e => {
                 this.attackShip(x, y);
               }}
-              className={`${style.ship} ${this.grid[x][y] ? style.ship__active : ''}`}
+              className={`${style.ship} `}
               key={x * this.size + y}>
-              {this.grid[x][y] !== null ? (this.grid[x][y].isSunk() ? 'X' : 'O') : ''}
+              {this.grid[x][y] !== null
+                ? this.grid[x][y].isSunk()
+                  ? 'X'
+                  : `${x} / ${y}`
+                : `${x} / ${y}`}
             </button>,
           ],
         }));
@@ -92,7 +125,6 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
   }
 
   componentDidMount() {
-    this.placeShips();
     this.renderCells();
   }
 

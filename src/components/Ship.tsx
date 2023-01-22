@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class Ship extends Component {
   private readonly size;
   public health;
-  private readonly positions: [number, number][];
+  private positions: [number, number][];
 
   constructor(size: number, positions: [number, number][]) {
     super(size, positions);
@@ -13,13 +13,11 @@ export default class Ship extends Component {
   }
 
   public hit() {
+    console.log(this.health);
     if (this.isSunk()) {
-      console.log(this.health);
       return;
     } else {
-      console.log(this.health);
-      this.health--;
-      return;
+      return this.health--;
     }
   }
   public getPositions() {
