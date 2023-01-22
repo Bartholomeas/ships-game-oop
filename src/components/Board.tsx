@@ -136,14 +136,14 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     console.log('to jest to');
     this.placeShips();
     this.renderCells();
     console.log(this.state.cells);
   }
 
-  componentDidlUpdate() {
+  componentDidUpdate() {
     console.log('update to jest');
   }
 
