@@ -41,18 +41,21 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
       this.grid[x][y].hit();
 
       if (this.grid[x][y].isSunk()) {
-        this.grid[x][y].returnPositions();
-        this.grid[x][y] = -1;
-        this.setState(prevState => {
-          const newCells = [...prevState.cells];
-          console.log(newCells[x * this.size + y]);
-          newCells[x * this.size + y] = (
-            <button className={`${style.ship} ${style.ship__sunk}`} key={x * this.size + y}>
-              X
-            </button>
-          );
-          return { cells: newCells };
-        });
+        for (const [i, j] of this.grid[x][y].getPositions()) {
+          this.grid[i][j] = -1;
+          this.setState(prevState => {
+            const newCells = [...prevState.cells];
+            newCells[i * this.size + j] = (
+              <button
+                onClick={() => console.log('zatopiony')}
+                className={`${style.ship} ${style.ship__sunk}`}
+                key={i * this.size + j}>
+                X
+              </button>
+            );
+            return { cells: newCells };
+          });
+        }
       }
       return true;
     }
@@ -92,14 +95,6 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
     this.placeShips();
     this.renderCells();
   }
-  // componentDidUpdate(prevProps: any, prevState: any) {
-  //   // this.renderCells();
-  //   console.log(prevState);
-  //   if (this.state !== prevState) {
-  //     console.log('rerender');
-  //     this.render();
-  //   }
-  // }
 
   public render() {
     return (

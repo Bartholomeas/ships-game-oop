@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 export default class Ship extends Component {
   private readonly size;
   public health;
-  private readonly positions;
+  private readonly positions: [number, number][];
 
-  constructor(size: number, positions: Array<[number, number]>) {
+  constructor(size: number, positions: [number, number][]) {
     super(size, positions);
     this.size = size;
     this.health = size;
@@ -22,7 +22,7 @@ export default class Ship extends Component {
       return;
     }
   }
-  public returnPositions() {
+  public getPositions() {
     console.log(this.positions);
     if (this.isSunk()) {
       return this.positions;
