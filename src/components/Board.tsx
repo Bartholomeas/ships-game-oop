@@ -23,10 +23,11 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
       cells: [],
     };
 
-    // this.placeShips = this.placeShips.bind(this);
-    // this.attackShip = this.attackShip.bind(this);
-    // this.checkWin = this.checkWin.bind(this);
-    // this.render = this.render.bind(this);
+    this.placeShips = this.placeShips.bind(this);
+    this.attackShip = this.attackShip.bind(this);
+    this.checkWin = this.checkWin.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.render = this.render.bind(this);
   }
 
   private placeShips() {
@@ -37,12 +38,6 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
         this.grid[x][y] = ship;
       }
     }
-  }
-
-  public checkSmth() {
-    // console.log(this.size);
-    console.log(this.state.cells);
-    return this.ships;
   }
 
   public placeSingleShip(ship: Ship) {
@@ -134,24 +129,13 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
         }));
       }
     }
+    return;
   }
 
   componentDidMount() {
-    console.log('to jest to');
-    this.placeShips();
+    console.log(this.ships);
+    // this.placeShips();
     this.renderCells();
-    console.log(this.state.cells);
-  }
-
-  componentDidUpdate() {
-    console.log('update to jest');
-  }
-
-  public generateBoard() {
-    this.placeShips();
-    this.renderCells();
-    this.render();
-    console.log('generuje');
   }
 
   public render() {

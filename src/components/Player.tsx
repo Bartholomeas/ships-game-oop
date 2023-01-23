@@ -55,7 +55,9 @@ export default class Player extends Component<any, any> {
       <div>
         <h2>{this.name}</h2>
         <h3>{this.active ? 'Kolej tego gracza' : ''}</h3>
-        <div className="">{this.state.board.generateBoard()}</div>
+        <div className="">
+          <Board ships={this.ships} />
+        </div>
       </div>
     );
   }
