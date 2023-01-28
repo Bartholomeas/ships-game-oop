@@ -7,11 +7,11 @@ interface Props {
 }
 
 export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }> implements Props {
-  public ships: Ship[];
+  // public ships: Ship[];
   public grid;
   public readonly size = 9;
 
-  constructor(ships: Ship[]) {
+  constructor(public ships: Ship[]) {
     super(ships as any);
     this.ships = ships;
     this.size = 9;
@@ -31,9 +31,9 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
   }
 
   private placeShips() {
-    // const { ships }: any = this.ships;
     if (!this.ships) return;
-    for (const ship of this.ships) {
+    // @ts-ignore
+    for (const ship of this.ships.ships) {
       for (const [x, y] of ship.positions) {
         this.grid[x][y] = ship;
       }
@@ -133,15 +133,12 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
   }
 
   componentDidMount() {
-    console.log(this.ships);
-    // this.placeShips();
+    // console.log(this.ships);
+    this.placeShips();
     this.renderCells();
   }
 
   public render() {
-    // this.renderCells();
-
-    // console.log(this.state.cells);
     return (
       <div className={style.wrapper}>
         <div className={style.position__wrapper}>{this.state.cells}</div>

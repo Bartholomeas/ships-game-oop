@@ -50,7 +50,6 @@ export default class Player extends Component<any, any> {
   }
 
   public render(): ReactNode {
-    // console.log(this.state.board.checkSmth());
     return (
       <div>
         <h2>{this.name}</h2>
