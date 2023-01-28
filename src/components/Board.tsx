@@ -7,13 +7,14 @@ interface Props {
 }
 
 export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }> implements Props {
-  private ships;
+  // public ships: Ship[];
   public grid;
   public readonly size = 9;
 
-  constructor(ships: Ship[]) {
+  constructor(public ships: Ship[]) {
     super(ships as any);
     this.ships = ships;
+    this.size = 9;
     this.grid = Array(this.size)
       .fill(null)
       .map(() => Array(this.size).fill(null));
@@ -21,13 +22,18 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
     this.state = {
       cells: [],
     };
-    this.placeShips();
+
+    this.placeShips = this.placeShips.bind(this);
+    this.attackShip = this.attackShip.bind(this);
+    this.checkWin = this.checkWin.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.render = this.render.bind(this);
   }
 
   private placeShips() {
-    const { ships }: any = this.ships;
-    console.log(ships);
-    for (const ship of ships) {
+    if (!this.ships) return;
+    // @ts-ignore
+    for (const ship of this.ships.ships) {
       for (const [x, y] of ship.positions) {
         this.grid[x][y] = ship;
       }
@@ -38,7 +44,6 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
     const { ships }: any = this.ships;
     for (const [x, y] of ships) {
       // this.grid[x][y] = ship;
-      console.log(x, y);
     }
   }
 
@@ -85,6 +90,7 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
           return { cells: newCells };
         });
         this.grid[x][y] = -1;
+        return true;
       }
 
       return true;
@@ -123,9 +129,12 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
         }));
       }
     }
+    return;
   }
 
   componentDidMount() {
+    // console.log(this.ships);
+    this.placeShips();
     this.renderCells();
   }
 

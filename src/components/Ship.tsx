@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class Ship extends Component {
   private readonly size;
   public health;
-  private positions: [number, number][];
+  public positions: [number, number][];
 
   constructor(size: number, positions: [number, number][]) {
     super(size, positions);
