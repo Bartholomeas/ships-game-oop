@@ -7,7 +7,6 @@ interface Props {
 }
 
 export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }> implements Props {
-  // public ships: Ship[];
   public grid;
   public readonly size = 9;
 
@@ -47,15 +46,11 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
     }
   }
 
-  public isOccupied(x: number, y: number) {
-    console.log('isOccupied function');
-    return this.grid[x][y] !== null;
-  }
-
   public attackShip(x: number, y: number): boolean {
     if (this.grid[x][y] === null) {
       this.grid[x][y] = -1;
       return false;
+    console.log(x,y)
     }
     if (this.grid[x][y] !== -1) {
       this.grid[x][y].hit();
@@ -67,7 +62,7 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
             const newCells = [...prevState.cells];
             newCells[i * this.size + j] = (
               <button
-                onClick={() => console.log(this)}
+                onClick={() => console.log(i,j)}
                 className={`${style.ship} ${style.ship__sunk}`}
                 key={i * this.size + j}>
                 X
@@ -81,7 +76,7 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
           const newCells = [...prevState.cells];
           newCells[x * this.size + y] = (
             <button
-              onClick={() => console.log(this)}
+              onClick={() => console.log(x,y)}
               className={`${style.ship} ${style.ship__hurt}`}
               key={x * this.size + y}>
               X
@@ -108,12 +103,10 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
   }
 
   private renderCells() {
+const shipCells = []
     for (let x = 0; x < this.size; x++) {
       for (let y = 0; y < this.size; y++) {
-        this.setState(prevState => ({
-          cells: [
-            ...prevState.cells,
-            <button
+        shipCells .push(    <button
               onClick={e => {
                 this.attackShip(x, y);
               }}
@@ -124,16 +117,18 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
                   ? 'X'
                   : `${x} / ${y}`
                 : `${x} / ${y}`}
-            </button>,
-          ],
-        }));
+            </button>)
+
       }
     }
+    this.setState({cells:shipCells})
+
+
     return;
   }
 
   componentDidMount() {
-    // console.log(this.ships);
+    console.log(this.ships);
     this.placeShips();
     this.renderCells();
   }
