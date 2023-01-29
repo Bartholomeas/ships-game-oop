@@ -97,6 +97,7 @@ export default class Board
   }
 
   private checkWin() {
+    // @ts-ignore
     for (const ship of this.ships.ships) {
       if (!ship.isSunk()) {
         return false;
