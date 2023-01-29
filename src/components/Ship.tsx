@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 export default class Ship extends Component {
-  private readonly size;
+  public readonly size;
   public health;
   public positions: [number, number][];
 
@@ -13,7 +13,6 @@ export default class Ship extends Component {
   }
 
   public hit() {
-    console.log(this.health);
     if (this.isSunk()) {
       return;
     } else {
@@ -21,14 +20,12 @@ export default class Ship extends Component {
     }
   }
   public getPositions() {
-    console.log(this.positions);
     if (this.isSunk()) {
       return this.positions;
     }
   }
 
   public isSunk(): boolean {
-    // console.log(this.positions);
     if (this.health === 0) console.log('zatopiony');
     return this.health === 0;
   }

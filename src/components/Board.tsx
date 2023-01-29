@@ -6,12 +6,19 @@ interface Props {
   props: any;
 }
 
-export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }> implements Props {
-  public grid;
-  public readonly size = 9;
+export default class Board
+  extends Component<
+    { ships: Ship[]; setIsActive: () => void; addPoint: () => void },
+    { cells: any[] }
+  >
+  implements Props
+{
+  private grid;
+  private readonly size = 9;
+  public ships;
 
-  constructor(public ships: Ship[]) {
-    super(ships as any);
+  constructor(ships: Ship[], props: any) {
+    super(ships as any, props);
     this.ships = ships;
     this.size = 9;
     this.grid = Array(this.size)
@@ -21,15 +28,15 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
     this.state = {
       cells: [],
     };
-
-    this.placeShips = this.placeShips.bind(this);
-    this.attackShip = this.attackShip.bind(this);
-    this.checkWin = this.checkWin.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
-    this.render = this.render.bind(this);
   }
 
+  public handleClick = () => {
+    this.props.setIsActive();
+  };
+
   private placeShips() {
+    console.log('placeships');
+    console.log(this.ships);
     if (!this.ships) return;
     // @ts-ignore
     for (const ship of this.ships.ships) {
@@ -39,30 +46,24 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
     }
   }
 
-  public placeSingleShip(ship: Ship) {
-    const { ships }: any = this.ships;
-    for (const [x, y] of ships) {
-      // this.grid[x][y] = ship;
-    }
-  }
-
   public attackShip(x: number, y: number): boolean {
+    this.props.setIsActive();
     if (this.grid[x][y] === null) {
       this.grid[x][y] = -1;
       return false;
-    console.log(x,y)
     }
     if (this.grid[x][y] !== -1) {
       this.grid[x][y].hit();
 
       if (this.grid[x][y].isSunk()) {
+        this.props.addPoint();
         for (const [i, j] of this.grid[x][y].getPositions()) {
           this.grid[i][j] = -1;
           this.setState(prevState => {
             const newCells = [...prevState.cells];
             newCells[i * this.size + j] = (
               <button
-                onClick={() => console.log(i,j)}
+                onClick={() => console.log(i, j)}
                 className={`${style.ship} ${style.ship__sunk}`}
                 key={i * this.size + j}>
                 X
@@ -76,7 +77,7 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
           const newCells = [...prevState.cells];
           newCells[x * this.size + y] = (
             <button
-              onClick={() => console.log(x,y)}
+              onClick={() => console.log(x, y)}
               className={`${style.ship} ${style.ship__hurt}`}
               key={x * this.size + y}>
               X
@@ -103,32 +104,31 @@ export default class Board extends Component<{ ships: Ship[] }, { cells: any[] }
   }
 
   private renderCells() {
-const shipCells = []
+    const shipCells = [];
     for (let x = 0; x < this.size; x++) {
       for (let y = 0; y < this.size; y++) {
-        shipCells .push(    <button
-              onClick={e => {
-                this.attackShip(x, y);
-              }}
-              className={`${style.ship} `}
-              key={x * this.size + y}>
-              {this.grid[x][y] !== null
-                ? this.grid[x][y].isSunk()
-                  ? 'X'
-                  : `${x} / ${y}`
-                : `${x} / ${y}`}
-            </button>)
-
+        shipCells.push(
+          <button
+            onClick={e => {
+              this.attackShip(x, y);
+            }}
+            className={`${style.ship} `}
+            key={x * this.size + y}>
+            {this.grid[x][y] !== null
+              ? this.grid[x][y].isSunk()
+                ? 'X'
+                : `${x} / ${y}`
+              : `${x} / ${y}`}
+          </button>
+        );
       }
     }
-    this.setState({cells:shipCells})
-
+    this.setState({ cells: shipCells });
 
     return;
   }
 
   componentDidMount() {
-    console.log(this.ships);
     this.placeShips();
     this.renderCells();
   }

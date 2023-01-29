@@ -1,5 +1,14 @@
 .flex {
-  display:flex;
+  display: flex;
   flex-direction: row;
-  background-color: pink;
+  align-items: center;
+  gap: 15px;
+  color: white;
+}
+
+.currentTurn {
+  background-color: tomato;
+  border-radius: 16px;
+  padding: 8px;
+  color: white;
 }

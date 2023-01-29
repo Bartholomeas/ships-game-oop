@@ -1,5 +1,5 @@
 import { Component } from "react";
-import * as style from "./styles/SinglePosition.module.css";
+import * as style from "./styles/Player.module.css";
 
 interface Props {
   [key: string]: any;
