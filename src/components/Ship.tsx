@@ -26,7 +26,6 @@ export default class Ship extends Component {
   }
 
   public isSunk(): boolean {
-    if (this.health === 0) console.log('zatopiony');
     return this.health === 0;
   }
 

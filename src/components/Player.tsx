@@ -6,7 +6,6 @@ import * as style from './styles/Player.module.css';
 export default class Player extends Component<any, any> {
   public name: string;
   public active: boolean;
-  private opponent: Player | null;
   private ships: Ship[];
   private board: Board;
 
@@ -14,7 +13,6 @@ export default class Player extends Component<any, any> {
     super(ships);
     this.name = name;
     this.active = active;
-    this.opponent = null;
     this.ships = ships;
     this.board = new Board(this.ships, this.setIsActive);
     this.state = {
@@ -24,17 +22,13 @@ export default class Player extends Component<any, any> {
     };
   }
 
-  public setOpponent(opponent: Player) {
-    this.opponent = opponent;
-  }
-
   public setIsActive = () => {
-    console.log(this.ships[0].isSunk());
     this.setState({ active: !this.state.active });
   };
 
   public addPoint = () => {
     this.setState({ shipsSunk: this.state.shipsSunk + 1 });
+    console.log('Zdobywasz punkt!');
     console.log(this.state.shipsSunk);
     return;
   };
@@ -47,13 +41,14 @@ export default class Player extends Component<any, any> {
   }
 
   public render(): ReactNode {
-    // console.log(this.ships);
+    let activePlayer = this.state.active;
+
     return (
       <div>
         <div className={style.flex}>
           <h2>{this.name}</h2>
           <p>Punktów: {this.state.shipsSunk}</p>
-          {this.state.active && <p className={style.currentTurn}> Kolej {this.name}</p>}
+          {activePlayer ? <p className={style.currentTurn}> Kolej {this.name}</p> : ''}
         </div>
         <div className="">
           <Board ships={this.ships} setIsActive={this.setIsActive} addPoint={this.addPoint} />

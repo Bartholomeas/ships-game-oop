@@ -5,15 +5,19 @@ import Player from './components/Player';
 
 class App extends Component<any, any> {
   shipSizes = [5, 4, 3, 3, 2];
-  public playerOneShips = this.generateShips(this.shipSizes);
-  public playerTwoShips = this.generateShips(this.shipSizes);
+
+  private playerOneShips = this.generateShips(this.shipSizes);
+  private playerTwoShips = this.generateShips(this.shipSizes);
 
   constructor(props: any) {
     super(props);
     this.state = {
-      activePlayer: this.playerOne,
+      // activePlayer: this.playerOne,
+      playerOne: new Player('Gracz 1', true, this.playerOneShips),
+      playerTwo: new Player('Gracz 2', false, this.playerTwoShips),
     };
   }
+
   private generateShips(shipSizes: number[]) {
     const ships: Ship[] = [];
     shipSizes.forEach(size => {
@@ -35,10 +39,10 @@ class App extends Component<any, any> {
     return ships;
   }
 
-  // public playerOne = new Player('Gracz pierwszy', true, this.playerOneShips);
-  // public playerTwo = new Player('Gracz pierwszy', true, this.playerTwoShips);
+  // public playerOne = new Player('Gracz 1', true, this.playerOneShips);
+  // public playerTwo = new Player('Gracz 2', true, this.playerTwoShips);
 
-  public playerOne = new Player('Gracz pierwszy', true, [
+  public playerOne = new Player('Gracz 1', true, [
     new Ship(5, [
       [2, 8],
       [2, 7],
@@ -67,7 +71,7 @@ class App extends Component<any, any> {
       [4, 1],
     ]),
   ]);
-  public playerTwo = new Player('Gracz Drugi', false, [
+  public playerTwo = new Player('Gracz 2', false, [
     new Ship(5, [
       [2, 8],
       [2, 7],
@@ -98,8 +102,6 @@ class App extends Component<any, any> {
   ]);
 
   render() {
-    console.log(this.playerOneShips);
-
     return (
       <div>
         <div className={style.wrapper}>

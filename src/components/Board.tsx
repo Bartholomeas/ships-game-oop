@@ -35,8 +35,6 @@ export default class Board
   };
 
   private placeShips() {
-    console.log('placeships');
-    console.log(this.ships);
     if (!this.ships) return;
     // @ts-ignore
     for (const ship of this.ships.ships) {
@@ -49,13 +47,17 @@ export default class Board
   public attackShip(x: number, y: number): boolean {
     this.props.setIsActive();
     if (this.grid[x][y] === null) {
+      console.log('Nie trafiłeś!');
       this.grid[x][y] = -1;
       return false;
     }
     if (this.grid[x][y] !== -1) {
+      console.log('Statek trafiony!');
       this.grid[x][y].hit();
 
       if (this.grid[x][y].isSunk()) {
+        console.log('Statek zatopiony!');
+        this.checkWin();
         this.props.addPoint();
         for (const [i, j] of this.grid[x][y].getPositions()) {
           this.grid[i][j] = -1;
@@ -94,12 +96,13 @@ export default class Board
     return false;
   }
 
-  public checkWin() {
-    for (const ship of this.ships) {
+  private checkWin() {
+    for (const ship of this.ships.ships) {
       if (!ship.isSunk()) {
         return false;
       }
     }
+    console.log('Gratulacje, zatopiłes wszystkie statki przeciwnika i wygrałeś!');
     return true;
   }
 
