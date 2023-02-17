@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import Ship from './Ship';
+import Ship from './Ships/Ship';
 import * as style from './styles/Board.module.css';
 
 interface Props {

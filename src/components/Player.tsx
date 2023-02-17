@@ -1,39 +1,45 @@
 import { Component, ReactNode } from 'react';
 import Board from './Board';
-import Ship from './Ship';
+import Ship from './Ships/Ship';
 import * as style from './styles/Player.module.css';
 
 export default class Player extends Component<any, any> {
-  public name: string;
-  public active: boolean;
-  private ships: Ship[];
+  private readonly name: string;
   private board: Board;
 
-  constructor(name: string, active: boolean, ships: Ship[]) {
-    super(ships);
+  constructor(name: string, props: any) {
+    super(props);
     this.name = name;
-    this.active = active;
-    this.ships = ships;
-    this.board = new Board(this.ships, this.setIsActive);
+
+    this.board = new Board(this.props.ships, this.setIsActive);
     this.state = {
-      active: this.active,
+      active: this.props.active,
       board: this.board,
       shipsSunk: 0,
     };
+    this.addPoint = this.addPoint.bind(this);
+    this.setIsActive = this.setIsActive.bind(this);
   }
 
-  public setIsActive = () => {
+  public setIsActive() {
     this.setState({ active: !this.state.active });
-  };
+    console.log(this.state.active);
+  }
 
-  public addPoint = () => {
+  public addPoint() {
     this.setState({ shipsSunk: this.state.shipsSunk + 1 });
     console.log('Zdobywasz punkt!');
     console.log(this.state.shipsSunk);
     return;
-  };
+  }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps: any, prevState: any) {
+    this.props.setIsActive();
+    console.log('first');
+    if (this.state.active !== prevState.active) {
+      console.log('inac');
+      this.props.setIsActive();
+    }
     if (this.state.shipsSunk === 10) {
       alert('Koniec gry');
       window.location.reload();
@@ -41,17 +47,15 @@ export default class Player extends Component<any, any> {
   }
 
   public render(): ReactNode {
-    let activePlayer = this.state.active;
-
     return (
       <div>
         <div className={style.flex}>
           <h2>{this.name}</h2>
           <p>Punktów: {this.state.shipsSunk}</p>
-          {activePlayer ? <p className={style.currentTurn}> Kolej {this.name}</p> : ''}
+          {this.state.active ? <p className={style.currentTurn}> Kolej {this.name}</p> : ''}
         </div>
         <div className="">
-          <Board ships={this.ships} setIsActive={this.setIsActive} addPoint={this.addPoint} />
+          <Board ships={this.props.ships} setIsActive={this.setIsActive} addPoint={this.addPoint} />
         </div>
       </div>
     );
