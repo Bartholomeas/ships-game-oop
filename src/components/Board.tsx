@@ -137,7 +137,7 @@ export default class Board
     this.renderCells();
   }
 
-  public render() {
+  render() {
     return (
       <div className={style.wrapper}>
         <div className={style.position__wrapper}>{this.state.cells}</div>

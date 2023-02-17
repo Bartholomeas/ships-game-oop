@@ -10,15 +10,12 @@ import ShipSm from './components/Ships/ShipSm';
 class App extends Component<any, any> {
   shipSizes = [5, 4, 3, 3, 2];
 
-  private playerOneShips = this.generateShips(this.shipSizes);
-  private playerTwoShips = this.generateShips(this.shipSizes);
-
   constructor(props: any) {
     super(props);
     this.state = {
       // activePlayer: this.playerOne,
-      playerOne: new Player('Gracz 1', this.playerOneShips),
-      playerTwo: new Player('Gracz 2', this.playerTwoShips),
+      playerOne: new Player('Gracz 1', this.generateShips(this.shipSizes)),
+      playerTwo: new Player('Gracz 2', this.generateShips(this.shipSizes)),
     };
   }
 

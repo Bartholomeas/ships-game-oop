@@ -8,8 +8,8 @@ export default class ShipMd extends Ship {
   public isSunk() {
     const isSunk = super.isSunk();
     if (isSunk) {
-      alert('Medium Ship is sunk!');
-      console.log('Medium Ship is sunk!');
+      alert('Średni statek jest zatopiony!');
+      console.log('Średni statek jest zatopiony!');
     }
     return isSunk;
   }

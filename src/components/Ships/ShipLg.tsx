@@ -7,8 +7,8 @@ export default class ShipLg extends Ship {
   public isSunk() {
     const isSunk = super.isSunk();
     if (isSunk) {
-      alert('Large Ship is sunk!');
-      console.log('Large Ship is sunk!');
+      alert('Duży statek jest zatopiony!');
+      console.log('Duży statek jest zatopiony!');
     }
     return isSunk;
   }

@@ -7,8 +7,8 @@ export default class ShipSm extends Ship {
   public isSunk() {
     const isSunk = super.isSunk();
     if (isSunk) {
-      alert('Small Ship is sunk!');
-      console.log('Small Ship is sunk!');
+      alert('Mały statek jest zatopiony!');
+      console.log('Mały statek jest zatopiony!');
     }
     return isSunk;
   }

@@ -8,8 +8,8 @@ export default class ShipXl extends Ship {
   public isSunk() {
     const isSunk = super.isSunk();
     if (isSunk) {
-      alert('XL Ship is sunk!');
-      console.log('XL Ship is sunk!');
+      alert('XL statek jest zatopiony!');
+      console.log('XL statek jest zatopiony!');
     }
     return isSunk;
   }

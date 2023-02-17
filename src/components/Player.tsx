@@ -35,9 +35,7 @@ export default class Player extends Component<any, any> {
 
   componentDidUpdate(prevProps: any, prevState: any) {
     this.props.setIsActive();
-    console.log('first');
     if (this.state.active !== prevState.active) {
-      console.log('inac');
       this.props.setIsActive();
     }
     if (this.state.shipsSunk === 10) {
@@ -46,7 +44,7 @@ export default class Player extends Component<any, any> {
     }
   }
 
-  public render(): ReactNode {
+  render(): ReactNode {
     return (
       <div>
         <div className={style.flex}>

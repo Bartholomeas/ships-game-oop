@@ -20,6 +20,7 @@ export default class Ship extends Component {
     }
   }
   public getPositions() {
+    console.log(this.positions);
     if (this.isSunk()) {
       return this.positions;
     }
