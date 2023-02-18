@@ -30,7 +30,7 @@ export default class Board
     };
   }
 
-  public handleClick = () => {
+  private handleClick = () => {
     this.props.setIsActive();
   };
 
@@ -44,7 +44,7 @@ export default class Board
     }
   }
 
-  public attackShip(x: number, y: number): boolean {
+  private attackShip(x: number, y: number): boolean {
     this.props.setIsActive();
     if (this.grid[x][y] === null) {
       console.log('Nie trafiłeś!');
